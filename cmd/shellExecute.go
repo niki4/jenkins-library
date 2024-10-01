@@ -83,9 +83,6 @@ func runShellExecute(config *shellExecuteOptions, telemetryData *telemetry.Custo
 		log.Entry().Info("starting running script:", source)
 
 		err = utils.RunExecutable(source, args...)
-		if err != nil {
-			log.Entry().Errorln("starting running script:", source)
-		}
 		// handle exit code
 		if ee, ok := err.(*exec.ExitError); ok {
 			switch ee.ExitCode() {
