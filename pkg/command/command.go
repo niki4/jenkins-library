@@ -138,6 +138,8 @@ func (c *Command) RunExecutable(executable string, params ...string) error {
 func (c *Command) RunExecutableWithAttrs(executable string, sysProcAttr *syscall.SysProcAttr, params ...string) error {
 	c.prepareOut()
 
+	log.Entry().Debugf("RunExecutableWithAttrs params: %#v", params)
+
 	cmd := ExecCommand(executable, params...)
 	cmd.SysProcAttr = sysProcAttr
 
