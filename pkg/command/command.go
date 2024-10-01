@@ -146,6 +146,7 @@ func (c *Command) RunExecutableWithAttrs(executable string, sysProcAttr *syscall
 	}
 
 	log.Entry().Infof("running command: %v %v", executable, strings.Join(params, (" ")))
+	log.Entry().Debugln("cmd:", cmd)
 
 	appendEnvironment(cmd, c.env)
 
