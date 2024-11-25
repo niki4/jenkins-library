@@ -34,6 +34,7 @@ func mavenBuild(config mavenBuildOptions, telemetryData *telemetry.CustomData, c
 		reflect.Indirect(cmd).FieldByName("StepName").SetString("mavenBuild")
 	}
 
+	log.Entry().Infof("debug 3: run mavenBuild with config: %v", config)
 	err := runMavenBuild(&config, telemetryData, utils, commonPipelineEnvironment)
 	if err != nil {
 		log.Entry().WithError(err).Fatal("step execution failed")
