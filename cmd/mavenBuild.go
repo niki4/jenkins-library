@@ -34,7 +34,6 @@ func mavenBuild(config mavenBuildOptions, telemetryData *telemetry.CustomData, c
 		reflect.Indirect(cmd).FieldByName("StepName").SetString("mavenBuild")
 	}
 
-	log.Entry().Infof("debug 3: run mavenBuild with config: %v", config)
 	err := runMavenBuild(&config, telemetryData, utils, commonPipelineEnvironment)
 	if err != nil {
 		log.Entry().WithError(err).Fatal("step execution failed")
@@ -95,6 +94,7 @@ func runMavenBuild(config *mavenBuildOptions, _ *telemetry.CustomData, utils mav
 	if len(config.Profiles) > 0 {
 		flags = append(flags, "--activate-profiles", strings.Join(config.Profiles, ","))
 	}
+	log.Entry().Infof("debug 3 (runMavenBuild): run mavenBuild with flags: %v", flags)
 
 	exists, _ := utils.FileExists("integration-tests/pom.xml")
 	if exists {
