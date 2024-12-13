@@ -592,7 +592,10 @@ func cfDeploy(
 	// TODO set HOME to config.DockerWorkspace
 	command.SetEnv(additionalEnvironment)
 
-	err = command.RunExecutable("cf", "version")
+	err = command.RunExecutable("cf", []string{"version"}...)
+	if err == nil {
+		log.Entry().Info("Command 'cf version' completed OK")
+	}
 
 	if err == nil {
 		err = _cfLogin(command, cloudfoundry.LoginOptions{
