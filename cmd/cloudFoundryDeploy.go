@@ -592,10 +592,12 @@ func cfDeploy(
 	// TODO set HOME to config.DockerWorkspace
 	command.SetEnv(additionalEnvironment)
 
-	err = command.RunExecutable("cf", []string{"version"}...)
-	if err == nil {
-		log.Entry().Info("Command 'cf version' completed OK")
-	}
+	// TODO indentify why we have "argument list too long" error
+	log.Entry().Info("Command 'cf version' skipped")
+	// err = command.RunExecutable("cf", []string{"version"}...)
+	// if err == nil {
+	// 	log.Entry().Info("Command 'cf version' completed OK")
+	// }
 
 	if err == nil {
 		err = _cfLogin(command, cloudfoundry.LoginOptions{
