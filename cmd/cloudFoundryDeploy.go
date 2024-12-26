@@ -442,6 +442,17 @@ func deployMta(config *cloudFoundryDeployOptions, mtarFilePath string, command c
 		}
 	}
 
+	// Freeing PIPER_VAULTCREDENTIAL environment variables to avoid "argument list too long" error in cfDeploy
+	envs := os.Environ()
+	for _, env := range envs {
+		if strings.HasSuffix(env, "PIPER_VAULTCREDENTIAL") {
+			key := strings.Split(env, "=")[0]
+			os.Unsetenv(key)
+		}
+	}
+	envs = os.Environ()
+	log.Entry().Debugf("Environment varibles (%d): %v", len(envs), envs)
+
 	cfDeployParams = append(cfDeployParams, extFileParams...)
 
 	err := cfDeploy(config, cfDeployParams, nil, command)
