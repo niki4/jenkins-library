@@ -10,11 +10,12 @@ import (
 )
 
 const (
-	vaultBadge       = "![Vault](https://img.shields.io/badge/-Vault-lightgrey)"
-	jenkinsOnlyBadge = "![Jenkins only](https://img.shields.io/badge/-Jenkins%20only-yellowgreen)"
-	secretBadge      = "![Secret](https://img.shields.io/badge/-Secret-yellowgreen)"
-	systemTrustBadge = "![System Trust](https://img.shields.io/badge/-System%20Trust-lightblue)"
-	deprecatedBadge  = "![deprecated](https://img.shields.io/badge/-deprecated-red)"
+	vaultBadge                = "![Vault](https://img.shields.io/badge/-Vault-lightgrey)"
+	jenkinsOnlyBadge          = "![Jenkins only](https://img.shields.io/badge/-Jenkins%20only-yellowgreen)"
+	secretBadge               = "![Secret](https://img.shields.io/badge/-Secret-yellowgreen)"
+	systemTrustBadge          = "![System Trust](https://img.shields.io/badge/-System%20Trust-lightblue)"
+	deprecatedBadge           = "![deprecated](https://img.shields.io/badge/-deprecated-red)"
+	gitHubAutomaticTokenBadge = "![GitHubAutomaticToken](https://img.shields.io/badge/GitHubAutomaticToken-yellow)"
 )
 
 var jenkinsParams = []string{"containerCommand", "containerName", "containerShell", "dockerVolumeBind", "dockerWorkspace", "sidecarReadyCommand", "sidecarWorkspace", "stashContent"}
@@ -120,13 +121,18 @@ func parameterFurtherInfo(paramName string, stepData *config.StepData, execution
 			}
 			if param.Secret {
 				secretInfo := fmt.Sprintf("%s pass via ENV or Jenkins credentials", secretBadge)
-
 				isVaultSecret := param.GetReference("vaultSecret") != nil || param.GetReference("vaultSecretFile") != nil
 				isSystemTrustSecret := param.GetReference(config.RefTypeSystemTrustSecret) != nil
 				if isVaultSecret && isSystemTrustSecret {
 					secretInfo = fmt.Sprintf(" %s %s %s pass via ENV, Vault, System Trust or Jenkins credentials", vaultBadge, systemTrustBadge, secretBadge)
 				} else if isVaultSecret {
-					secretInfo = fmt.Sprintf(" %s %s pass via ENV, Vault or Jenkins credentials", vaultBadge, secretBadge)
+					// if VaultSecret, resourceRef.default is github/gitHttpsCredentials , send a badge
+					vaultSecretRef := param.GetReference("vaultSecret")
+					if vaultSecretRef != nil && (*vaultSecretRef).Default == "github" || (*vaultSecretRef).Default == "gitHttpsCredential" {
+						secretInfo = fmt.Sprintf(" %s %s %s pass via ENV, Vault or Jenkins credentials", vaultBadge, secretBadge, gitHubAutomaticTokenBadge)
+					} else {
+						secretInfo = fmt.Sprintf(" %s %s pass via ENV, Vault or Jenkins credentials", vaultBadge, secretBadge)
+					}
 				}
 
 				for _, res := range param.ResourceRef {

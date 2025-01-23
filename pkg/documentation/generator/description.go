@@ -35,6 +35,13 @@ type CustomLibrary struct {
 	Steps       []string `yaml:"steps,omitempty"`
 }
 
+var CustomStepsForAutoTokenBadge = []CustomSteps{}
+
+type CustomSteps struct {
+	Name  string   `yaml:"name,omitempty"`
+	Steps []string `yaml:"steps,omitempty"`
+}
+
 // Replaces the StepName placeholder with the content from the yaml
 func createStepName(stepData *config.StepData) string {
 	return "# " + stepData.Metadata.Name + "\n\n" + stepData.Metadata.Description + "\n"

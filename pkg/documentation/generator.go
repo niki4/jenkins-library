@@ -31,6 +31,7 @@ func main() {
 	var metadataPath string
 	var docTemplatePath string
 	var customLibraryStepFile string
+	var customStepsForAutoTokenBadge string
 	var customDefaultFiles sliceFlags
 	var includeAzure, includeGHA bool
 	flag.StringVar(&metadataPath, "metadataDir", "./resources/metadata", "The directory containing the step metadata. Default points to \\'resources/metadata\\'.")
@@ -39,6 +40,7 @@ func main() {
 	flag.Var(&customDefaultFiles, "customDefaultFile", "Path to a custom default configuration file.")
 	flag.BoolVar(&includeAzure, "includeAzure", false, "Include Azure-specifics in step documentation.")
 	flag.BoolVar(&includeGHA, "includeGHA", false, "Include GitHub Actions-specifics in step documentation.")
+	flag.StringVar(&customStepsForAutoTokenBadge, "customStepsForAutoTokenBadge", "", "Specify Path to the Yaml file with custom steps needed for generating Automatic token tag")
 
 	// flags for stage documentation
 	var generateStageConfig bool
@@ -77,6 +79,14 @@ func main() {
 			err = yaml.Unmarshal(content, &generator.CustomLibrarySteps)
 			checkError(err)
 			fmt.Println(generator.CustomLibrarySteps)
+		}
+		if len(customStepsForAutoTokenBadge) > 0 {
+			fmt.Println("Reading steps for Automatic token mapping...")
+			content, err := os.ReadFile(customStepsForAutoTokenBadge)
+			checkError(err)
+			err = yaml.Unmarshal(content, &generator.CustomStepsForAutoTokenBadge)
+			checkError(err)
+			fmt.Println(generator.CustomStepsForAutoTokenBadge)
 		}
 
 		metadataFiles, err := helper.MetadataFiles(metadataPath)
