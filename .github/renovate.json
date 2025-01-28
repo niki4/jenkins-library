@@ -10,7 +10,6 @@
     "labels": [
         "dependencies"
       ],
-    ],
     "postUpdateOptions": [
         "gomodTidy",
         "gomodUpdateImportPaths"
