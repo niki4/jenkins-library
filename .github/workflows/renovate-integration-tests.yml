@@ -19,7 +19,7 @@ jobs:
           script: |
             const issue_number = context.issue.number;
             const comment = "/it-go";
-            github.issues.createComment({
+            github.rest.issues.createComment({
               ...context.repo,
               issue_number,
               body: comment
