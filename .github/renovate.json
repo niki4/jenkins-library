@@ -10,17 +10,11 @@
     "labels": [
         "dependencies"
       ],
-    "packageRules": [
-        {
-          "description": "Automerge non-major updates (versions >1.0.0)",
-          "matchUpdateTypes": ["minor", "patch"],
-          "matchCurrentVersion": "!/^0/",
-          "automerge": true
-        }
     ],
     "postUpdateOptions": [
         "gomodTidy",
         "gomodUpdateImportPaths"
     ],
+    "automerge": true,
     "rollbackPrs": true
 }
