@@ -14,7 +14,7 @@
         {
             "description": "Automerge updates (except versions 0.x as they could have breaking changes)",
             "matchUpdateTypes": ["patch"],
-            "matchCurrentVersion": "!/^0/",
+            "matchCurrentVersion": "!/^v0/",
             "automerge": true
         }],
     "postUpdateOptions": [
