@@ -1,9 +1,10 @@
 name: Renovatebot - Trigger integration tests on PR update
 
 on:
-  push:
+  pull_request:
     branches:
       - 'renovate/**'
+    types: [opened, synchronize, reopened]
 
 jobs:
   comment:
