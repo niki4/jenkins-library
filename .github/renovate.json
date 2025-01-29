@@ -10,10 +10,16 @@
     "labels": [
         "dependencies"
       ],
+    "packageRules": [
+        {
+            "description": "Automerge updates (except versions 0.x as they could have breaking changes)",
+            "matchUpdateTypes": ["patch"],
+            "matchCurrentVersion": "!/^0/",
+            "automerge": true
+        }],
     "postUpdateOptions": [
         "gomodTidy",
         "gomodUpdateImportPaths"
     ],
-    "automerge": true,
     "rollbackPrs": true
 }
