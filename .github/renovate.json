@@ -12,9 +12,9 @@
       ],
     "packageRules": [
         {
-            "description": "Automerge updates (except versions 0.x as they could have breaking changes)",
+            "description": "Automerge patch version updates (except versions 0.x as they could have breaking changes)",
             "matchUpdateTypes": ["patch"],
-            "matchCurrentVersion": "!/^v0/",
+            "matchCurrentVersion": "!/^(v?0)/",
             "automerge": true
         }],
     "postUpdateOptions": [
