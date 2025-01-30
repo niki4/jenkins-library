@@ -16,8 +16,14 @@
             "matchUpdateTypes": ["patch"],
             "matchCurrentVersion": "!/^(v?0)/",
             "automerge": true,
-            "rollbackPrs": true
-        }],
+            
+        },
+        {
+            "description": "Create PRs to roll back versions if the current version is not found in the registry.",
+            "rollbackPrs": true,
+            "automerge": true
+        }
+    ],
     "postUpdateOptions": [
         "gomodTidy",
         "gomodUpdateImportPaths"
