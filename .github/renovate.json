@@ -12,14 +12,15 @@
       ],
     "packageRules": [
         {
-            "description": "Automerge patch version updates (except versions 0.x as they could have breaking changes)",
+            "description": "Automerge patch version updates for Go modules (except versions 0.x as they could have breaking changes)",
+            "matchManagers": ["gomod"],
             "matchUpdateTypes": ["patch"],
             "matchCurrentVersion": "!/^(v?0)/",
-            "automerge": true,
-            
+            "automerge": true
         },
         {
             "description": "Create PRs to roll back versions if the current version is not found in the registry.",
+            "matchManagers": ["gomod"],
             "rollbackPrs": true,
             "automerge": true
         }
