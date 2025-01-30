@@ -16,10 +16,10 @@
             "matchUpdateTypes": ["patch"],
             "matchCurrentVersion": "!/^(v?0)/",
             "automerge": true
+            "rollbackPrs": true
         }],
     "postUpdateOptions": [
         "gomodTidy",
         "gomodUpdateImportPaths"
     ],
-    "rollbackPrs": true
 }
