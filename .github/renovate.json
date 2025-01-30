@@ -14,7 +14,7 @@
         {
             "description": "Create PRs to roll back Go module if the current version is not found in the registry.",
             "matchManagers": ["gomod"],
-            "rollbackPrs": true,
+            "rollbackPrs": true
         },
         {
             "description": "Automerge patch version updates for Go modules (except versions 0.x as they could have breaking changes)",
