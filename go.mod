@@ -5,7 +5,7 @@ go 1.23.4
 replace github.com/imdario/mergo => github.com/imdario/mergo v0.3.16
 
 require (
-	cloud.google.com/go/pubsub v1.45.1
+	cloud.google.com/go/pubsub v1.45.3
 	cloud.google.com/go/storage v1.50.0
 	github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v0.4.1
 	github.com/BurntSushi/toml v1.4.0
