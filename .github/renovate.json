@@ -16,7 +16,6 @@
             "matchManagers": ["gomod"],
             "matchUpdateTypes": ["patch"],
             "rollbackPrs": true,
-            "automerge": true
         },
         {
             "description": "Automerge patch version updates for Go modules (except versions 0.x as they could have breaking changes)",
