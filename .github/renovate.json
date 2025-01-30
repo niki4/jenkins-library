@@ -19,7 +19,7 @@
             "automerge": true
         },
         {
-            "description": "Create PRs to roll back versions if the current version is not found in the registry.",
+            "description": "Create PRs to roll back Go module if the current version is not found in the registry.",
             "matchManagers": ["gomod"],
             "rollbackPrs": true,
             "automerge": true
